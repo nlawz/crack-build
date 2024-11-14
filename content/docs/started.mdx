@@ -1,0 +1,105 @@
+---
+title: Getting Started
+description: get setup
+---
+
+import { File, Folder, Files } from 'fumadocs-ui/components/files';
+
+## Installation
+
+### Recommended: Using `create-t3-app`
+
+It's recommended to use `create-t3-app` to get started with this project. To install and set up the project, follow these steps:
+
+```bash
+# Install create-t3-app globally if you haven't already
+pnpm install -g create-t3-app
+
+# Create a new project
+pnpm create t3-app@latest my-project
+◇  Will you be using TypeScript or JavaScript?
+│  TypeScript
+│
+◇  Will you be using Tailwind CSS for styling?
+│  Yes
+│
+◇  Would you like to use tRPC?
+│  No
+│
+◇  What authentication provider would you like to use?
+│  None
+│
+◇  What database ORM would you like to use?
+│  None
+│
+◇  Would you like to use Next.js App Router?
+│  Yes
+│
+◇  Should we initialize a Git repository and stage the changes?
+│  Yes
+│
+◇  Should we run 'pnpm install' for you?
+│  Yes
+│
+◇  What import alias would you like to use?
+│  ~/
+
+# Navigate into your project directory
+cd my-project
+
+# Install all necessary dependencies
+pnpm i clsx tailwind-merge framer-motion
+
+# Start the development server
+pnpm dev
+```
+
+### Option 2: Using `create-next-app`
+
+go back and use t3-app instead.
+
+```bash
+# Create a new project
+pnpm create next-app my-project
+
+# Navigate into your project directory
+cd my-project
+
+# Install all necessary dependencies
+pnpm install tailwindcss postcss autoprefixer framer-motion clsx tailwind-merge class-variance-authority
+npx tailwindcss init -p
+```
+
+### Configure tailwind.config
+
+```js
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+ 
+    // Or if using `src` directory:
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+### add to globals.css
+
+```
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### Start the development server
+```bash
+pnpm dev
+```

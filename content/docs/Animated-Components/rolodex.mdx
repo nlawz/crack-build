@@ -1,0 +1,254 @@
+---
+title: rolodex
+description: rolodex
+---
+
+import { Scrollycoding } from "@/components/scrollycoding";
+import { DivOrigami } from "@/components/rolodex";
+import { PreviewWrapper } from "@/components/preview-wrapper";
+
+cool orbiting planets around expanding rings.
+
+<PreviewWrapper>
+    <DivOrigami />
+</PreviewWrapper>
+<Scrollycoding>
+
+## !!steps components/ui/card.tsx
+
+shadcn
+
+{/* prettier-ignore */}
+```jsx ! card.tsx
+import * as React from "react";
+
+import { cn } from "@/lib/utils";
+
+
+const Card = React.forwardRef<
+    HTMLDivElement,
+    React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+    <div
+        ref={ref}
+        className={cn(
+            "rounded-lg border bg-card text-card-foreground shadow-sm",
+            className
+        )}
+        {...props}
+    />
+));
+Card.displayName = "Card";
+
+const CardHeader = React.forwardRef<
+    HTMLDivElement,
+    React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+    <div
+        ref={ref}
+        className={cn("flex flex-col space-y-1.5 p-6", className)}
+        {...props}
+    />
+));
+CardHeader.displayName = "CardHeader";
+
+const CardTitle = React.forwardRef<
+    HTMLParagraphElement,
+    React.HTMLAttributes<HTMLHeadingElement>
+>(({ className, ...props }, ref) => (
+    <h3
+        ref={ref}
+        className={cn(
+            "text-2xl font-semibold leading-none tracking-tight",
+            className
+        )}
+        {...props}
+    />
+));
+CardTitle.displayName = "CardTitle";
+
+const CardDescription = React.forwardRef<
+    HTMLParagraphElement,
+    React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+    <p
+        ref={ref}
+        className={cn("text-sm text-muted-foreground", className)}
+        {...props}
+    />
+));
+CardDescription.displayName = "CardDescription";
+
+const CardContent = React.forwardRef<
+    HTMLDivElement,
+    React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+));
+CardContent.displayName = "CardContent";
+
+const CardFooter = React.forwardRef<
+    HTMLDivElement,
+    React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+    <div
+        ref={ref}
+        className={cn("flex items-center p-6 pt-0", className)}
+        {...props}
+    />
+));
+CardFooter.displayName = "CardFooter";
+
+export {
+    Card,
+    CardHeader,
+    CardFooter,
+    CardTitle,
+    CardDescription,
+    CardContent,
+};
+
+```
+
+## !!steps components/planets.tsx
+
+cracked
+
+```jsx ! planets.tsx
+import React from "react";
+
+export function PlanetAnimation() {
+    return (
+        <div className="group relative flex flex-col overflow-hidden pb-6">
+            <div className="mb-4">
+                <p className="text-xl sm:text-2xl text-gray-300">
+                    <strong className="text-white">
+                        We like to move fast.
+                    </strong>
+                </p>
+            </div>
+            <div className="relative aspect-square w-full max-w-[250px] mx-auto transition-all duration-300 ease-out group-hover:scale-110">
+                {[...Array(5)].map((_, i) => (
+                    <div
+                        key={i}
+                        className={`absolute inset-0 rounded-full border border-rose-300 transition-all duration-300 ease-out group-hover:scale-105
+                            ${i === 0 ? "bg-white bg-opacity-5" : ""}`}
+                        style={{
+                            transform: `scale(${1 - i * 0.15})`,
+                            opacity: 1 - i * 0.2,
+                            transitionDelay: `${i * 50}ms`,
+                        }}
+                    />
+                ))}
+                {[0, -40].map((rotation, i) => (
+                    <div
+                        key={i}
+                        className="absolute inset-0 animate-rotate"
+                        style={{ transform: `rotate(${rotation}deg)` }}>
+                        <div
+                            className={`absolute rounded-full ${
+                                i === 0
+                                    ? "bg-rose-300 h-3 w-3"
+                                    : "bg-gray-400 h-2 w-2"
+                            }`}
+                            style={{ top: "-2%", left: "50%" }}
+                        />
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+export default PlanetAnimation;
+```
+
+## !!steps components/planet-card.tsx
+
+cracked
+
+{/* prettier-ignore */}
+```jsx ! planet-card.tsx
+import { Card, CardTitle, CardDescription } from "./ui/card";
+import { type ReactNode } from "react";
+import { PlanetAnimation } from "./planets";
+
+interface Content {
+    title: string;
+    description: string;
+    imagePath?: ReactNode;
+}
+
+const content: Content[] = [
+    {
+        title: "Quick Build Times",
+        description:
+            "Fast development cycles mean you can launch your product sooner, learn from real users, and iterate faster.",
+        imagePath: <PlanetAnimation />,
+    },
+];
+
+const PlanetCard = () => {
+    return (
+        <div
+            className="pb-4"
+            style={{
+                background:
+                    "linear-gradient(180deg,transparent,rgba(97,106,115,.12) 40%,rgba(97,106,115,.12) 60%,rgba(97,106,115,0))",
+            }}>
+       
+                {content.map((point, index) => (
+                    <Card
+                        key={index}
+                        className="group relative h-auto min-h-[500px] overflow-hidden rounded-2xl border-none font-corm shadow-2xl p-4">
+                            {point.imagePath}
+                            <CardTitle className="mb-2 p-0 text-white">
+                                {point.title}
+                            </CardTitle>
+                            <CardDescription className="text-base text-custom-gray">
+                                <span>{point.description}</span>
+                            </CardDescription>
+                    </Card>
+                ))}
+            </div>
+      
+    );
+};
+
+export default PlanetCard;
+```
+
+## !!steps tailwind.config.ts
+
+styles
+
+```js ! tailwind.config.ts
+/** @type {import('tailwindcss').Config} */
+export default {
+    content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+    presets: [createPreset()],
+    theme: {
+        extend: {
+            animation: {
+                first: "moveVertical 30s ease infinite",
+                second: "moveInCircle 20s reverse infinite",
+                third: "moveInCircle 40s linear infinite",
+                fourth: "moveHorizontal 40s ease infinite",
+                fifth: "moveInCircle 20s ease infinite",
+                rotate: "rotate 5s linear infinite",
+            },
+            keyframes: {
+                rotate: {
+                    from: { transform: "rotate(var(--tw-rotate))" },
+                    to: { transform: "rotate(360deg)" },
+                },
+            },
+            boxShadow: {
+                circles: "0px 2px 3px 0px rgba(253, 164, 175, 0.9)",
+            },
+        },
+    },
+};
+```
+
+</Scrollycoding>

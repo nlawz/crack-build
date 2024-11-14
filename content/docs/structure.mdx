@@ -1,0 +1,40 @@
+---
+title: App structure
+description: files
+---
+
+import { File, Folder, Files } from "fumadocs-ui/components/files";
+
+## project structure
+
+all of the shadcn files are in components/ui. lib folder holds a util cn function and any other utility functions. the cracked components are placed in the components folder highlighted below.
+
+<Files>
+    <Folder name="public" />
+    <Folder name="src" defaultOpen>
+        <Folder name="app" defaultOpen>
+            <File name="layout.tsx" />
+            <File name="page.tsx" />
+        </Folder>
+        <Folder name="styles" defaultOpen>
+            <File name="global.css" />
+        </Folder>
+        <Folder name="lib" defaultOpen>
+            <File name="utils.ts" />
+        </Folder>
+    </Folder>
+    <Folder name="components" defaultOpen>
+        <Folder name="ui" defaultOpen>
+            {" "}
+            <File name="button.tsx" />
+            <File name="tabs.tsx" />
+            <File name="dialog.tsx" />{" "}
+        </Folder>
+        <File className="bg-turq text-black hover:bg-purp hover:text-black" name="cracked.tsx" />
+    </Folder>
+    <File name="next.config.js" />
+    <File name="package.json" />
+    <File name="postcss.config.js" />
+    <File name="tailwind.config.ts" />
+    <File name="tsconfig.json" />
+</Files>
