@@ -14,7 +14,7 @@ const navigation = [
         title: "Company",
         links: [
             {
-                title: "Cracked Labs",
+                title: "crack.dev",
                 href: "https://crack.dev",
                 external: true,
             },
