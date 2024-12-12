@@ -18,10 +18,10 @@ const navigation = [
                 href: "https://crack.dev",
                 external: true,
             },
-            { title: "Manifesto", href: "/manifesto" },
-            { title: "Blog", href: "/blog" },
-            { title: "Changelog", href: "/changelog" },
-            { title: "Templates", href: "/templates" },
+            { title: "Manifesto", href: "/" },
+            { title: "Blog", href: "/" },
+            { title: "Changelog", href: "/" },
+            { title: "Templates", href: "https://starter.crack.build", external:true },
             {
                 title: "Docs",
                 href: "/docs",
@@ -91,7 +91,7 @@ export function Footer() {
             Build products faster.
           </div>
           <div className="text-sm font-normal leading-6 text-white/40">
-            cracked labs {new Date().getUTCFullYear()}
+            crack.dev {new Date().getUTCFullYear()}
           </div>
         </div>
 
